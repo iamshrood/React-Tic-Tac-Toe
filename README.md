@@ -56,7 +56,7 @@
 
    ![image-20220117174431628](https://s2.loli.net/2022/01/17/qY2B8x351ZfIHDN.png)
 
-## 四、技术难点
+## 三、技术难点
 
 1. ### 历史记录的升降序
 
@@ -80,6 +80,6 @@
 
       ![image-20220117181554761](https://s2.loli.net/2022/01/17/VpCAPxJfuSnwIdQ.png)
 
-## 三、源代码地址
+## 四、源代码地址
 
 > github：https://github.com/iamshrood/React-Tic-Tac-Toe
