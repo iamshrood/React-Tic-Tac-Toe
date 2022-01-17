@@ -1,70 +1,85 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# React井字棋
 
-In the project directory, you can run:
+## 一、基本功能实现
 
-### `npm start`
+> 注：以下为基本教程包含功能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. ### 显示下一个棋手/轮流落子
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   ![image-20220117173148805](https://s2.loli.net/2022/01/17/GA9V25XihTuaxgb.png)
 
-### `npm test`
+2. ### 显示赢家棋手
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ![image-20220117173219118](https://s2.loli.net/2022/01/17/2QM4DeV1UEx3slJ.png)
 
-### `npm run build`
+3. ### 显示历史记录
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ![image-20220117173411728](https://s2.loli.net/2022/01/17/7Z6NWPgra9MBEbd.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. ### 历史记录回退
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ![image-20220117173445347](https://s2.loli.net/2022/01/17/HDuovZiLWknsKNO.png)
 
-### `npm run eject`
+## 二、进阶功能实现
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> 注：此为教程之外实现的进阶功能
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. ### 在游戏历史记录列表显示每一步棋的坐标，格式为 (列号, 行号)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ![image-20220117173715377](https://s2.loli.net/2022/01/17/3KrCERFnOImuscL.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. ### 在历史记录列表中加粗显示当前选择的项目
 
-## Learn More
+   > 加粗样式更改为切换背景颜色
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ![image-20220117173733736](https://s2.loli.net/2022/01/17/JsMemv8SkpTaKBE.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. ### 使用两个循环来渲染出棋盘的格子，而不是在代码里写死（hardcode）
 
-### Code Splitting
+   ![image-20220117173850282](https://s2.loli.net/2022/01/17/onXaW7LzEgseTrx.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. ### 添加一个可以升序或降序显示历史记录的按钮
 
-### Analyzing the Bundle Size
+   ![image-20220117173924045](https://s2.loli.net/2022/01/17/PtzNLApTcl8MCnj.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+5. ### 每当有人获胜时，高亮显示连成一线的 3 颗棋子
 
-### Making a Progressive Web App
+6. > 获胜3秒后，自动初始化重开棋局
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   ![image-20220117173948611](https://s2.loli.net/2022/01/17/pm3gwblYfzyaAHP.png)
 
-### Advanced Configuration
+7. ### 当无人获胜时，显示一个平局的消息
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   > 显示平局信息3秒后，自动初始化重开棋局
 
-### Deployment
+   ![image-20220117174431628](https://s2.loli.net/2022/01/17/qY2B8x351ZfIHDN.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 三、技术难点
 
-### `npm run build` fails to minify
+1. ### 历史记录的升降序
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   因为历史记录涉及操作和逻辑较多，加入升降序以后需要判断状态。
+
+   1. 首先是**翻转历史记录数组**，这步较为简单，只是一开始判断显示start历史记录时，利用的是索引值。导致翻转之后start历史记录仍在第一位，而不是最后一位。后续给每个历史记录对象添加id属性，并且将id属性绑定为组件的key值。
+
+      ![image-20220117175311553](https://s2.loli.net/2022/01/17/WsYXTgofGV9A863.png)
+
+   2. 然后是**选中历史记录的高亮显示**，因为之前记录步骤的stepNumber变量仅赋值为数组最后一位，加入升降序需要修改逻辑。在升降序的按钮类名中写入三元表达式，判断当前历史记录按钮组件id是否和记录步骤的stepNumber变量相等，相等则意味着该历史记录按钮被选中，使用选中class样式。
+
+      ![image-20220117175720273](https://s2.loli.net/2022/01/17/d9c6xf4MXsHrAjo.png)
+
+   3. 接下里是确保**历史记录可以正确跳转**，点击历史记录将原先传递的组件索引值替换为id值，这样可以确保正确的找到需要跳转的历史记录。
+
+      因为跳转历史记录之后的第一次点击棋盘格，会把该历史记录之后的记录清除并且重新记录，所以这时会根据排序类型去分割出需要保留的历史记录数组。然后也需要找到当前跳转到的记录，因为数组已经分割好，所以只需要判断排序类型就可以简单获取到当前的记录。
+
+      ![image-20220117180837761](https://s2.loli.net/2022/01/17/YdtcTfbA3ukOmD8.png)
+
+   4. 最后是**跳转记录后第一次下棋可以正确的记录**。因为排序不同，新记录的插入位置也不同，id也需要正确记录。
+
+      ![image-20220117181554761](https://s2.loli.net/2022/01/17/VpCAPxJfuSnwIdQ.png)
+
+## 三、源代码地址
+
+> github：https://github.com/iamshrood/React-Tic-Tac-Toe
